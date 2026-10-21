@@ -3,7 +3,7 @@
     "title": "The Chronicle of Reverse Engineering & Landmark Repositories",
     "subtitle": "30+ Years of Decompilers, Disassemblers, Binary Analysis & Open-Source Breakthroughs",
     "lastUpdated": "2026-10",
-    "totalRepos": 35,
+    "totalRepos": 42,
     "eras": [
       {
         "id": "frontier-ai",
@@ -23,12 +23,12 @@
       {
         "id": "golden-disassembly",
         "name": "2000-2009: The Golden Age of Cracking & Disassembly",
-        "tagline": "OllyDbg, IDA Hex-Rays Decompiler, and Boomerang"
+        "tagline": "OllyDbg, IDA Hex-Rays Decompiler, PEiD, and Boomerang"
       },
       {
         "id": "dawn-roots",
-        "name": "1990-1999: The Dawn of Reverse Engineering",
-        "tagline": "SoftICE, GDB, GNU Binutils, and early x86 disassemblers"
+        "name": "1980-1999: The Dawn of Reverse Engineering",
+        "tagline": "DEBUG.EXE, SoftICE, Cifuentes dcc, W32Dasm, and GDB roots"
       }
     ]
   },
@@ -125,6 +125,29 @@
       "tags": ["Hex Editor", "Pattern Language", "Binary Inspection", "C++20"]
     },
     {
+      "id": "dogbolt-decompiler-explorer",
+      "name": "jtgrassie/dogbolt",
+      "repoUrl": "https://github.com/jtgrassie/dogbolt",
+      "era": "frontier-ai",
+      "year": 2022,
+      "category": "Decompiler Multi-Engine",
+      "badge": "Decompiler Explorer",
+      "stars": "2.8k+",
+      "origin": "Dogbolt Project",
+      "summary": "The Godbolt Compiler Explorer equivalent for decompilers. Runs uploaded binaries simultaneously through Ghidra, Hex-Rays, angr, Binary Ninja, Boomerang, and RetDec for instant side-by-side comparative analysis.",
+      "technicalHighlights": [
+        "Headless orchestration of 8+ commercial and open-source decompiler engines",
+        "Interactive web diffing showing variations in control flow recovery across engines",
+        "Essential benchmark utility for compiler and decompiler authors"
+      ],
+      "paradigmShift": "Democratized the benchmarking and comparative evaluation of decompilers across the industry.",
+      "links": {
+        "github": "https://github.com/jtgrassie/dogbolt",
+        "web": "https://dogbolt.org"
+      },
+      "tags": ["Decompiler Explorer", "Benchmarking", "Multi-Engine", "Diffing"]
+    },
+    {
       "id": "nsa-ghidra",
       "name": "NationalSecurityAgency/ghidra",
       "repoUrl": "https://github.com/NationalSecurityAgency/ghidra",
@@ -161,7 +184,7 @@
       "summary": "Free and Open Source graphical reverse engineering platform powered by Rizin (radare2 fork) featuring integrated Ghidra decompiler plugin, graph view, and native C++/Qt UI.",
       "technicalHighlights": [
         "Modular architecture linking Rizin CLI core with high-performance Qt UI",
-        "Native native integration with the Ghidra decompiler engine without needing a JVM runtime",
+        "Native integration with the Ghidra decompiler engine without needing a JVM runtime",
         "Jupyter notebook integration, binary emulation, and symbol search"
       ],
       "paradigmShift": "Delivered an ultra-fast, native C++ desktop alternative to Ghidra's heavy memory-intensive Java runtime.",
@@ -217,6 +240,73 @@
       "tags": ["Radare2", "UNIX", "ESIL", "Scriptable", "Disassembly"]
     },
     {
+      "id": "qiling-framework",
+      "name": "qilingframework/qiling",
+      "repoUrl": "https://github.com/qilingframework/qiling",
+      "era": "nsa-ghidra",
+      "year": 2019,
+      "category": "Binary Instrumentation & OS Emulation",
+      "badge": "OS-Level Sandbox",
+      "stars": "5.5k+",
+      "origin": "KaiJern Lau & Qiling Team",
+      "summary": "True advanced binary emulation framework. Unlike CPU-only emulators (Unicorn), Qiling emulates entire operating systems (Windows, Linux, macOS, QNX, UEFI, DOS) including kernel APIs, sys-calls, and file systems.",
+      "technicalHighlights": [
+        "Cross-architecture (x86, ARM, MIPS) and cross-OS dynamic emulation",
+        "Intercepts Windows kernel APIs and POSIX syscalls inside a Python sandbox",
+        "Automated IoT/router firmware fuzzing and malware unpacker"
+      ],
+      "paradigmShift": "Enabled safe, high-speed emulation of complex malware and IoT firmware without configuring physical hardware or hypervisors.",
+      "links": {
+        "github": "https://github.com/qilingframework/qiling",
+        "web": "https://qiling.io"
+      },
+      "tags": ["Qiling", "OS Emulation", "Firmware", "Unicorn", "Malware Sandbox"]
+    },
+    {
+      "id": "jadx-decompiler",
+      "name": "skylot/jadx",
+      "repoUrl": "https://github.com/skylot/jadx",
+      "era": "nsa-ghidra",
+      "year": 2015,
+      "category": "Android & Bytecode Decompilation",
+      "badge": "Android Decompilation King",
+      "stars": "43k+",
+      "origin": "Skylot",
+      "summary": "Dex to Java decompiler and GUI tool for Android APK reverse engineering. Directly extracts Java source code, manifests, and decrypted resources from raw Android APKs.",
+      "technicalHighlights": [
+        "Direct Dalvik bytecode (DEX) to readable Java source lifting",
+        "Interactive Java deobfuscator with automated symbol renaming",
+        "Integrated debugger and smali bytecode editor"
+      ],
+      "paradigmShift": "Became the universal industry standard for mobile application penetration testing and Android malware triage.",
+      "links": {
+        "github": "https://github.com/skylot/jadx"
+      },
+      "tags": ["JADX", "Android", "DEX", "Java Decompiler", "APK"]
+    },
+    {
+      "id": "dnspy",
+      "name": "dnSpy/dnSpy",
+      "repoUrl": "https://github.com/dnSpy/dnSpy",
+      "era": "symbolic-execution",
+      "year": 2014,
+      "category": ".NET Decompiler & Debugger",
+      "badge": ".NET Reversing God",
+      "stars": "26k+",
+      "origin": "0xd4d",
+      "summary": "The premier .NET assembly decompiler, editor, and debugger. Allows live modification of C# / IL code directly inside compiled assemblies without source code access.",
+      "technicalHighlights": [
+        "Direct IL-to-C# decompilation engine using ILSpy decompiler core",
+        "Live debugging of Unity game engines and commercial .NET software",
+        "In-place assembly patching and binary re-compilation"
+      ],
+      "paradigmShift": "Made .NET reverse engineering as fluid as editing standard source code in an IDE.",
+      "links": {
+        "github": "https://github.com/dnSpy/dnSpy"
+      },
+      "tags": [".NET", "C#", "dnSpy", "IL", "Unity Reversing"]
+    },
+    {
       "id": "x64dbg",
       "name": "x64dbg/x64dbg",
       "repoUrl": "https://github.com/x64dbg/x64dbg",
@@ -238,6 +328,28 @@
         "web": "https://x64dbg.com"
       },
       "tags": ["x64dbg", "Windows Debugger", "Dynamic Analysis", "Malware"]
+    },
+    {
+      "id": "binwalk",
+      "name": "ReFirmLabs/binwalk",
+      "repoUrl": "https://github.com/ReFirmLabs/binwalk",
+      "era": "symbolic-execution",
+      "year": 2010,
+      "category": "Firmware Extraction & Reverse Engineering",
+      "badge": "Firmware Carving Standard",
+      "stars": "11.5k+",
+      "origin": "Craig Heffner (ReFirm Labs)",
+      "summary": "The undisputed standard tool for searching, extracting, and reverse engineering embedded firmware images, router ROMs, and IoT flash memory dumps.",
+      "technicalHighlights": [
+        "Magic byte signature scanner mapping nested filesystems (SquashFS, CramFS, JFFS2, U-Boot)",
+        "Automated recursive extraction and decompression of nested firmware archives",
+        "Entropy graphing to detect encrypted bootloaders and compressed payloads"
+      ],
+      "paradigmShift": "Created modern hardware/IoT firmware reverse engineering as an accessible, automated discipline.",
+      "links": {
+        "github": "https://github.com/ReFirmLabs/binwalk"
+      },
+      "tags": ["Binwalk", "Firmware", "IoT", "SquashFS", "Hardware Reversing"]
     },
     {
       "id": "angr-framework",
@@ -378,6 +490,50 @@
       "tags": ["Triton", "Taint Analysis", "Concolic Execution", "Deobfuscation"]
     },
     {
+      "id": "pwndbg",
+      "name": "pwndbg/pwndbg",
+      "repoUrl": "https://github.com/pwndbg/pwndbg",
+      "era": "symbolic-execution",
+      "year": 2016,
+      "category": "GDB Exploit & Reversing Framework",
+      "badge": "Modern GDB Overhaul",
+      "stars": "8.2k+",
+      "origin": "Zach Riggle & pwndbg team",
+      "summary": "GDB plug-in designed to make debugging with GDB less painful for exploit developers and reverse engineers, with an IDA Pro / OllyDbg styled layout, heap visualizer, and ROP gadgets.",
+      "technicalHighlights": [
+        "Deep glibc heap chunk dissection (tcache, fastbins, unsorted bins)",
+        "Context layout displaying registers, disassembly, stack, and backtrace simultaneously",
+        "Emulation-assisted conditional jump determination"
+      ],
+      "paradigmShift": "Elevated the ancient GNU Debugger into a world-class binary exploitation and CTF reversing tool.",
+      "links": {
+        "github": "https://github.com/pwndbg/pwndbg"
+      },
+      "tags": ["pwndbg", "GDB", "Exploit Development", "Heap Analysis", "CTF"]
+    },
+    {
+      "id": "retdec-decompiler",
+      "name": "avast/retdec",
+      "repoUrl": "https://github.com/avast/retdec",
+      "era": "symbolic-execution",
+      "year": 2017,
+      "category": "LLVM-Based Decompiler",
+      "badge": "LLVM Decompiler Pioneer",
+      "stars": "6.8k+",
+      "origin": "Avast Software",
+      "summary": "Retargetable machine-code decompiler based on LLVM IR. Open-sourced by Avast, it proved LLVM could be utilized in reverse—lifting binary code to LLVM bitcode and applying standard LLVM passes.",
+      "technicalHighlights": [
+        "Translates machine code (x86, ARM, MIPS, PIC32) directly into LLVM IR",
+        "Applies LLVM optimization passes to simplify obfuscated instruction sequences",
+        "Full C source code generation and call graph reconstruction"
+      ],
+      "paradigmShift": "Demonstrated the power of leveraging LLVM's rich optimization ecosystem for binary decompilation.",
+      "links": {
+        "github": "https://github.com/avast/retdec"
+      },
+      "tags": ["RetDec", "LLVM", "Avast", "IR Decompilation"]
+    },
+    {
       "id": "ollydbg",
       "name": "OllyDbg (Historical Archive)",
       "repoUrl": "http://www.ollydbg.de",
@@ -401,6 +557,96 @@
       "tags": ["OllyDbg", "32-bit", "Ring 3", "Unpacking", "Cracking Era"]
     },
     {
+      "id": "peid-packer-detector",
+      "name": "PEiD (Executable Identifier)",
+      "repoUrl": "https://archive.org/details/peid-0.95",
+      "era": "golden-disassembly",
+      "year": 2002,
+      "category": "Packer & Signature Detection",
+      "badge": "Signature Pioneer",
+      "stars": "Historic Legend",
+      "origin": "snaker & QUnpack",
+      "summary": "The ubiquitous tool of the 2000s for detecting packers, cryptors, and compilers (UPX, ASPack, Themida, Armadillo) using byte signatures, PE header inspection, and entropy calculation.",
+      "technicalHighlights": [
+        "Database of 600+ signature definitions matching entry-point byte sequences",
+        "Plugin interface supporting generic OEP (Original Entry Point) finders and dumpers",
+        "Foundation for modern signature engines like YARA and capa"
+      ],
+      "paradigmShift": "Established the doctrine of identifying executable wrappers and obfuscators prior to manual disassembly.",
+      "links": {
+        "archive": "https://archive.org/details/peid-0.95"
+      },
+      "tags": ["PEiD", "Packers", "Signatures", "UPX", "OEP Finder"]
+    },
+    {
+      "id": "sysinternals",
+      "name": "Microsoft Sysinternals (Russinovich)",
+      "repoUrl": "https://learn.microsoft.com/en-us/sysinternals/",
+      "era": "golden-disassembly",
+      "year": 1996,
+      "category": "System Internals & Dynamic Triage",
+      "badge": "Windows Internals Holy Grail",
+      "stars": "Industrial Pillar",
+      "origin": "Mark Russinovich & Bryce Cogswell",
+      "summary": "Process Explorer, Process Monitor (Regmon/Filemon), and ProcDump. The definitive toolkit for dynamic Windows reverse engineering, hooking kernel drivers to reveal every file, registry, and thread interaction.",
+      "technicalHighlights": [
+        "Kernel-level event tracing intercepting I/O request packets (IRPs)",
+        "Thread call stack symbol resolution and loaded DLL enumeration",
+        "Exposed hidden Windows kernel mechanisms and rootkits (Sony BMG rootkit discovery)"
+      ],
+      "paradigmShift": "Gave reverse engineers complete transparency into OS runtime behavior without attaching a debugger.",
+      "links": {
+        "web": "https://learn.microsoft.com/en-us/sysinternals/"
+      },
+      "tags": ["Sysinternals", "Process Monitor", "Process Explorer", "Russinovich"]
+    },
+    {
+      "id": "boomerang-decompiler",
+      "name": "Boomerang Decompiler",
+      "repoUrl": "https://sourceforge.net/projects/boomerang/",
+      "era": "golden-disassembly",
+      "year": 2002,
+      "category": "Open-Source Decompiler Pioneer",
+      "badge": "FOSS Decompiler Pioneer",
+      "stars": "Historic Pioneer",
+      "origin": "Mike Van Emmerik & Trent Waddington",
+      "summary": "One of the earliest attempts to create a complete, open-source general-purpose machine code decompiler translating x86, SPARC, and PowerPC to C based on Cristina Cifuentes' theory.",
+      "technicalHighlights": [
+        "Dataflow analysis with Single Static Assignment (SSA) form",
+        "Type inference and structure identification algorithms",
+        "Laying the open-source groundwork that inspired later decompiler projects like RetDec and Ghidra"
+      ],
+      "paradigmShift": "Proved that open-source decompilation was academically viable beyond closed commercial labs.",
+      "links": {
+        "web": "https://boomerang.sourceforge.net/",
+        "archive": "https://sourceforge.net/projects/boomerang/"
+      },
+      "tags": ["Boomerang", "SSA", "Cifuentes", "Pioneer Decompiler"]
+    },
+    {
+      "id": "immunity-debugger",
+      "name": "Immunity Debugger",
+      "repoUrl": "https://www.immunityinc.com",
+      "era": "golden-disassembly",
+      "year": 2007,
+      "category": "Python-Scripted Exploitation Debugger",
+      "badge": "Exploit Dev Standard",
+      "stars": "Historic Legend",
+      "origin": "Immunity Inc. (Dave Aitel)",
+      "summary": "Built on top of OllyDbg core with a deep Python API integration. Standardized heap spraying analysis, ROP gadget searching (mona.py by Corelan), and automated exploit development.",
+      "technicalHighlights": [
+        "Native Python API exposing memory breakpoints, register states, and disassembly",
+        "Birthplace of 'mona.py', the legendary script for bypassing DEP and ASLR",
+        "Definitive training tool for the OSCP and OSCE certifications"
+      ],
+      "paradigmShift": "Connected binary debugging directly to programmatic Python automation for offensive exploit creation.",
+      "links": {
+        "web": "https://www.immunityinc.com",
+        "archive": "https://archive.org/details/immunitydebugger-1.85"
+      },
+      "tags": ["Immunity", "mona.py", "Python Debugging", "Heap Exploitation", "OSCP"]
+    },
+    {
       "id": "ida-pro",
       "name": "IDA Pro & Hex-Rays Decompiler",
       "repoUrl": "https://hex-rays.com/ida-pro",
@@ -410,7 +656,7 @@
       "badge": "The Gold Standard",
       "stars": "Commercial Standard",
       "origin": "Ilfak Guilfanov (Hex-Rays)",
-      "summary": "First conceived in 1991 for MS-DOS, IDA evolved into the indisputable gold standard of reverse engineering, culminating in the 2007 debut of the Hex-Rays Decompiler producing structured C code from raw x86 binaries.",
+      "summary": "Conceived in 1991 for MS-DOS, IDA evolved into the indisputable gold standard of reverse engineering, culminating in the 2007 debut of the Hex-Rays Decompiler producing structured C code from raw x86 binaries.",
       "technicalHighlights": [
         "FLIRT (Fast Library Identification and Recognition Technology) identifying compiler standard libraries",
         "Type propagation engine resolving complex nested structures and virtual function tables (vtables)",
@@ -469,6 +715,50 @@
       "tags": ["Wireshark", "Ethereal", "Protocol Reversing", "PCAP"]
     },
     {
+      "id": "cifuentes-dcc",
+      "name": "dcc Decompiler (Cristina Cifuentes)",
+      "repoUrl": "https://archive.org/details/cifuentes-phd-thesis-1994",
+      "era": "dawn-roots",
+      "year": 1994,
+      "category": "Decompiler Academic Genesis",
+      "badge": "Theoretical Mother of Decompilers",
+      "stars": "Historic Monument",
+      "origin": "Dr. Cristina Cifuentes (Univ. of Queensland)",
+      "summary": "The landmark 1994 PhD thesis 'Reverse Compilation Techniques' and its prototype 'dcc' for Intel 80286 DOS binaries. Founded modern decompilation science, introducing Control Flow Graph schema and type analysis.",
+      "technicalHighlights": [
+        "Introduced the foundational schema for structuring high-level loops and conditions from raw jump graphs",
+        "First formalized dataflow analysis on machine registers to recover function parameters",
+        "Directly inspired Hex-Rays, Boomerang, and NSA Ghidra decompiler architectures"
+      ],
+      "paradigmShift": "Single-handedly transformed reverse compilation from a mathematical impossibility into an exact computer science discipline.",
+      "links": {
+        "paper": "https://archive.org/details/cifuentes-phd-thesis-1994"
+      },
+      "tags": ["Cifuentes", "dcc", "Thesis", "Decompilation Foundation", "CFG"]
+    },
+    {
+      "id": "w32dasm",
+      "name": "W32Dasm (Windows 32-bit Disassembler)",
+      "repoUrl": "https://archive.org/details/w32dasm-8.93",
+      "era": "dawn-roots",
+      "year": 1996,
+      "category": "Early Windows GUI Disassembler",
+      "badge": "The 1990s Cracking Icon",
+      "stars": "Historic Legend",
+      "origin": "URSoftware",
+      "summary": "The iconic Windows 95/98 GUI disassembler. Known by every software reverse engineer and shareware cracker in the late 1990s for its green jump lines and instant string reference finder.",
+      "technicalHighlights": [
+        "String data reference search locating dialog text ('Invalid Registration Key!') in seconds",
+        "Visual jump call navigation with target address resolution",
+        "Integrated basic debugger for stepping through PE headers and API imports"
+      ],
+      "paradigmShift": "First tool to make 32-bit Windows PE binary disassembly visual, accessible, and fast for PC enthusiasts.",
+      "links": {
+        "archive": "https://archive.org/details/w32dasm-8.93"
+      },
+      "tags": ["W32Dasm", "Windows 95", "PE", "1990s Reversing", "Shareware Era"]
+    },
+    {
       "id": "numega-softice",
       "name": "NuMega SoftICE",
       "repoUrl": "https://archive.org/details/softice-historical-archive",
@@ -489,6 +779,50 @@
         "archive": "https://archive.org/details/softice-historical-archive"
       },
       "tags": ["SoftICE", "Ring 0", "Kernel Debugger", "NuMega", "Ctrl+D"]
+    },
+    {
+      "id": "sourcer-disassembler",
+      "name": "Sourcer (V Communications)",
+      "repoUrl": "https://archive.org/details/sourcer-commenting-disassembler",
+      "era": "dawn-roots",
+      "year": 1988,
+      "category": "Automated Commenting Disassembler",
+      "badge": "Early PC Disassembly Leader",
+      "stars": "Historic Monument",
+      "origin": "V Communications",
+      "summary": "The world's first automated 'commenting disassembler' for MS-DOS. Read binary files and generated fully commented 8086/80286/80386 assembly code ready to reassemble with MASM.",
+      "technicalHighlights": [
+        "Automated BIOS and DOS interrupt call annotation (e.g. INT 21h AH=09h -> Display String)",
+        "Separation of code execution streams from data tables via multipass analysis",
+        "Generated compilable source output matching the original machine code byte-for-byte"
+      ],
+      "paradigmShift": "Proved that automated multi-pass analysis could turn opaque machine code back into readable, re-assemblable source files.",
+      "links": {
+        "archive": "https://archive.org/details/sourcer-commenting-disassembler"
+      },
+      "tags": ["Sourcer", "MS-DOS", "MASM", "Commenting Disassembler", "1988"]
+    },
+    {
+      "id": "msdos-debug",
+      "name": "MS-DOS DEBUG.EXE",
+      "repoUrl": "https://en.wikipedia.org/wiki/Debug_(command)",
+      "era": "dawn-roots",
+      "year": 1981,
+      "category": "First PC Disassembler & Hex Editor",
+      "badge": "The Genesis (1981)",
+      "stars": "The Root of All PC Reversing",
+      "origin": "Tim Paterson (Seattle Computer Products / Microsoft)",
+      "summary": "Included in DOS 1.0 through Windows 98. The 'U' (Unassemble) and 'A' (Assemble) commands introduced millions of computer users to CPU registers (AX, BX, CX, DX) and machine code reverse engineering.",
+      "technicalHighlights": [
+        "Direct 16-bit real-mode segment:offset memory inspection and modification",
+        "Interactive line assembler and disassembler running in under 20 KB of RAM",
+        "Used to inspect BIOS routines, defeat early floppy disk protections, and analyze DOS boot sectors"
+      ],
+      "paradigmShift": "The universal root ancestor of all PC-era binary reverse engineering, debugging, and memory patching.",
+      "links": {
+        "web": "https://en.wikipedia.org/wiki/Debug_(command)"
+      },
+      "tags": ["DEBUG.EXE", "MS-DOS", "Tim Paterson", "1981", "Genesis"]
     },
     {
       "id": "gnu-gdb-binutils",
@@ -538,9 +872,9 @@
     }
   ],
   "stats": {
-    "decadesCovered": "4 Decades (1980s - 2020s)",
-    "milestones": 35,
-    "primaryFocus": "Decompilers, Reverse Engineering, Symbolic Execution, Binary Analysis",
+    "decadesCovered": "4.5 Decades (1981 - 2026)",
+    "milestones": 42,
+    "primaryFocus": "Decompilers, Reverse Engineering, Symbolic Execution, Binary Analysis, AI Models",
     "githubPagesStatus": "Active"
   }
 }

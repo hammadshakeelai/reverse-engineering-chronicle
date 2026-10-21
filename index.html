@@ -189,6 +189,8 @@
         <button onclick="setCategoryFilter('Decompiler')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Decompilers</button>
         <button onclick="setCategoryFilter('Symbolic Execution')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Symbolic & Taint</button>
         <button onclick="setCategoryFilter('Debugger')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Debuggers</button>
+        <button onclick="setCategoryFilter('Disassembler')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Disassemblers</button>
+        <button onclick="setCategoryFilter('Firmware')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Firmware & Carving</button>
       </div>
 
       <!-- Chronological Sort Toggle -->
@@ -446,6 +448,12 @@
       try {
         const res = await fetch('./data/timeline.json');
         timelineData = await res.json();
+        
+        if (timelineData && timelineData.repositories) {
+          const countEl = document.getElementById('metricMilestones');
+          if (countEl) countEl.innerText = timelineData.repositories.length + '+';
+        }
+
         renderTimeline();
         renderEraPills();
       } catch (err) {

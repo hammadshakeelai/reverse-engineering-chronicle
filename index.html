@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronicle of Reverse Engineering | 30+ Years of Decompilers & Landmark Repos</title>
+  <meta name="description" content="Interactive visual timeline of 30+ years of reverse engineering repositories, decompilers, disassemblers, NSA Ghidra, and modern AI autonomous binary analysis.">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace'],
+            display: ['"Space Grotesk"', 'sans-serif']
+          },
+          colors: {
+            cyber: {
+              black: '#07090e',
+              dark: '#0c101a',
+              card: 'rgba(16, 22, 36, 0.75)',
+              border: 'rgba(0, 240, 255, 0.2)',
+              cyan: '#00f0ff',
+              neonPink: '#ff007f',
+              neonGreen: '#00ff66',
+              neonPurple: '#9d00ff',
+              gold: '#ffd700'
+            }
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'radar': 'radar 4s linear infinite',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(0,240,255,0.4))' },
+              '50%': { opacity: '0.9', filter: 'drop-shadow(0 0 35px rgba(255,0,127,0.8))' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07090e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00f0ff, #9d00ff);
+      border-radius: 4px;
+    }
+
+    /* Cyber Glass & Grid */
+    .cyber-glass {
+      background: rgba(13, 18, 30, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 240, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+    .cyber-glass:hover {
+      border-color: rgba(0, 240, 255, 0.5);
+      box-shadow: 0 12px 40px -10px rgba(0, 240, 255, 0.25);
+    }
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    }
+    .scanline {
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 240, 255, 0.04) 50%, rgba(0, 240, 255, 0.04));
+      background-size: 100% 4px;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #00f0ff 0%, #a855f7 50%, #ff007f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #00f0ff 0%, #00ff66 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-cyber-black text-slate-100 font-sans min-h-screen relative overflow-x-hidden selection:bg-cyber-cyan selection:text-cyber-black">
+
+  <!-- Interactive Background Canvas -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+  <div class="fixed inset-0 scanline pointer-events-none z-0"></div>
+
+  <!-- Sound Toggle & Quick Controls Floating Bar -->
+  <div class="fixed top-5 right-5 z-50 flex items-center gap-3">
+    <button id="soundToggleBtn" onclick="toggleAudio()" class="cyber-glass px-4 py-2 rounded-full text-xs font-mono font-bold flex items-center gap-2 hover:text-cyber-cyan transition-all border border-cyber-cyan/30">
+      <i id="soundIcon" class="fa-solid fa-volume-xmark text-cyber-neonPink"></i>
+      <span id="soundStatus">SFX OFF</span>
+    </button>
+    <a href="https://github.com" target="_blank" id="githubRepoLink" class="cyber-glass px-4 py-2 rounded-full text-xs font-mono font-bold flex items-center gap-2 hover:text-cyber-cyan transition-all border border-cyber-cyan/30">
+      <i class="fa-brands fa-github text-lg"></i>
+      <span>Star Repo</span>
+    </a>
+  </div>
+
+  <!-- Navigation / Header -->
+  <header class="relative z-10 pt-16 pb-12 px-4 max-w-7xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full cyber-glass border border-cyber-cyan/40 text-cyber-cyan font-mono text-xs uppercase tracking-widest mb-6 animate-pulse">
+      <span class="w-2 h-2 rounded-full bg-cyber-cyan animate-ping"></span>
+      Decompiled History: 1990 - 2026
+    </div>
+
+    <h1 class="text-4xl md:text-7xl font-display font-black tracking-tight leading-none mb-6">
+      THE CHRONICLE OF <br>
+      <span class="text-gradient">REVERSE ENGINEERING</span>
+    </h1>
+
+    <p class="max-w-3xl mx-auto text-slate-400 text-lg md:text-xl font-light leading-relaxed mb-10">
+      An exhaustive visual genealogy of disassemblers, decompilers, binary analysis engines, and milestone GitHub repositories. 
+      From Ring 0 <span class="text-cyber-cyan font-mono">SoftICE</span> and <span class="text-cyber-cyan font-mono">IDA Pro</span>, through the declassification of NSA's <span class="text-cyber-neonPink font-mono font-bold">Ghidra</span>, up to today's autonomous <span class="text-cyber-neonGreen font-mono font-bold">AI MCP & LLM Decompilers</span>.
+    </p>
+
+    <!-- Key Metrics Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+      <div class="cyber-glass p-5 rounded-2xl border border-white/5 text-center">
+        <div class="text-3xl md:text-4xl font-display font-bold text-cyber-cyan" id="metricDecades">4+</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mt-1">Decades Charted</div>
+      </div>
+      <div class="cyber-glass p-5 rounded-2xl border border-white/5 text-center">
+        <div class="text-3xl md:text-4xl font-display font-bold text-cyber-neonPink" id="metricMilestones">35+</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mt-1">Landmark Repos</div>
+      </div>
+      <div class="cyber-glass p-5 rounded-2xl border border-white/5 text-center">
+        <div class="text-3xl md:text-4xl font-display font-bold text-cyber-neonGreen" id="metricStars">500k+</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mt-1">Total GitHub Stars</div>
+      </div>
+      <div class="cyber-glass p-5 rounded-2xl border border-white/5 text-center">
+        <div class="text-3xl md:text-4xl font-display font-bold text-cyber-gold">100%</div>
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mt-1">Open Knowledge</div>
+      </div>
+    </div>
+
+    <!-- Era Quick Jump Nav -->
+    <div class="flex flex-wrap justify-center gap-2 mb-8" id="eraPillsContainer">
+      <!-- Generated via JS -->
+    </div>
+  </header>
+
+  <!-- Filter & Search Toolbar -->
+  <div class="sticky top-4 z-40 max-w-7xl mx-auto px-4 mb-12">
+    <div class="cyber-glass p-4 rounded-2xl border border-cyber-cyan/30 shadow-2xl flex flex-col md:flex-row gap-4 items-center justify-between">
+      
+      <!-- Search Input -->
+      <div class="relative w-full md:w-96">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search repo, author (NSA, Ilfak), tag, or technology..." 
+          class="w-full bg-cyber-black/70 border border-white/10 rounded-xl pl-11 pr-4 py-2.5 text-sm font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyber-cyan transition-all text-white"
+          oninput="handleSearch(this.value)"
+        >
+      </div>
+
+      <!-- Category Filter Dropdown -->
+      <div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider whitespace-nowrap">Filter:</span>
+        <button onclick="setCategoryFilter('all')" class="cat-pill active px-3 py-1.5 rounded-lg text-xs font-mono border border-cyber-cyan bg-cyber-cyan/20 text-cyber-cyan whitespace-nowrap">All Paradigms</button>
+        <button onclick="setCategoryFilter('AI Reverse Engineering')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">AI & MCP</button>
+        <button onclick="setCategoryFilter('Decompiler')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Decompilers</button>
+        <button onclick="setCategoryFilter('Symbolic Execution')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Symbolic & Taint</button>
+        <button onclick="setCategoryFilter('Debugger')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 hover:border-cyber-cyan text-slate-300 whitespace-nowrap">Debuggers</button>
+      </div>
+
+      <!-- Chronological Sort Toggle -->
+      <button onclick="toggleSortOrder()" id="sortOrderBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-cyber-cyan transition-all whitespace-nowrap">
+        <i class="fa-solid fa-arrow-down-wide-short" id="sortIcon"></i>
+        <span id="sortLabel">Newest (AI & NSA Top)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Timeline Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 pb-28">
+    
+    <!-- Central Glowing Spine -->
+    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyber-cyan via-cyber-neonPurple to-cyber-neonPink opacity-40 -translate-x-1/2"></div>
+
+    <!-- Timeline Cards Render Target -->
+    <div id="timelineContainer" class="space-y-16">
+      <!-- Dynamically filled with JSON data -->
+    </div>
+
+    <!-- Comparison Matrix Section -->
+    <section class="mt-32 cyber-glass rounded-3xl p-6 md:p-10 border border-cyber-cyan/30">
+      <div class="text-center mb-10">
+        <div class="inline-block px-3 py-1 rounded-full bg-cyber-neonPurple/20 border border-cyber-neonPurple text-cyber-neonPurple font-mono text-xs uppercase mb-3">
+          Architecture Matrix
+        </div>
+        <h2 class="text-3xl md:text-4xl font-display font-bold">Evolution of Decompiler Engines</h2>
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm mt-2">
+          Comparing how the titans disassemble, construct control flow, and emit pseudo-code across 30 years.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left font-mono text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-slate-400">
+              <th class="p-3">Platform</th>
+              <th class="p-3">Origin / Era</th>
+              <th class="p-3">Intermediate Lang (IL)</th>
+              <th class="p-3">Decompiler Engine</th>
+              <th class="p-3">Primary Architecture</th>
+              <th class="p-3">License & Model</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-slate-300">
+            <tr class="hover:bg-white/5">
+              <td class="p-3 font-bold text-cyber-neonPink">NSA Ghidra</td>
+              <td class="p-3">2019 (NSA Declassified)</td>
+              <td class="p-3 text-cyber-cyan">P-Code (via Sleigh)</td>
+              <td class="p-3">SSA C++ Decompiler Core</td>
+              <td class="p-3">Multi-tier Java GUI + C++ Engine</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Apache 2.0 (Free)</span></td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="p-3 font-bold text-cyber-cyan">Hex-Rays / IDA Pro</td>
+              <td class="p-3">1991 / 2007 Decompiler</td>
+              <td class="p-3 text-cyber-cyan">Microcode</td>
+              <td class="p-3">FLIRT + Microcode Optimizer</td>
+              <td class="p-3">Native C++ (Qt UI)</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Proprietary Commercial</span></td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="p-3 font-bold text-purple-400">Rizin + Cutter</td>
+              <td class="p-3">2020 (Radare2 fork)</td>
+              <td class="p-3 text-cyber-cyan">RzIL / ESIL</td>
+              <td class="p-3">Native Ghidra Plugin (rz-ghidra)</td>
+              <td class="p-3">Pure C Core + C++ Qt UI</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">LGPL / GPL (Free)</span></td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="p-3 font-bold text-yellow-400">Binary Ninja</td>
+              <td class="p-3">2016 (Vector 35)</td>
+              <td class="p-3 text-cyber-cyan">Tiered (LLIL, MLIL, HLIL)</td>
+              <td class="p-3">Multi-pass SSA Lifting Engine</td>
+              <td class="p-3">Multi-threaded C++ Core + Python API</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Commercial / Free Demo</span></td>
+            </tr>
+            <tr class="hover:bg-white/5">
+              <td class="p-3 font-bold text-cyber-neonGreen">REA (morluto/rea)</td>
+              <td class="p-3">2025 (AI Frontier)</td>
+              <td class="p-3 text-cyber-cyan">JSON-RPC AST / MCP</td>
+              <td class="p-3">LLM Multi-Agent Synthesis</td>
+              <td class="p-3">TypeScript MCP Server + Headless Engines</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">MIT (Free)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Deep Dive Detail Modal -->
+  <div id="repoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cyber-black/80 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300">
+    <div class="cyber-glass max-w-2xl w-full rounded-3xl p-6 md:p-8 border border-cyber-cyan/50 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-cyber-cyan text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span id="modalBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan/30"></span>
+        <span id="modalYear" class="text-xs font-mono text-slate-400"></span>
+      </div>
+
+      <h3 id="modalTitle" class="text-3xl font-display font-bold text-white mb-2"></h3>
+      <p id="modalOrigin" class="text-xs font-mono text-cyber-neonPink mb-6"></p>
+
+      <div class="space-y-6">
+        <div>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Overview</h4>
+          <p id="modalSummary" class="text-slate-300 text-sm leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Technical Breakthroughs</h4>
+          <ul id="modalHighlights" class="space-y-2 text-sm text-slate-300 list-disc list-inside"></ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+          <h4 class="text-xs font-mono uppercase tracking-wider text-cyber-cyan mb-1">Historical Paradigm Shift</h4>
+          <p id="modalParadigm" class="text-slate-300 text-xs italic"></p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-white/10" id="modalLinks">
+          <!-- Links will be inserted dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-12 text-center text-xs font-mono text-slate-500 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p>The Chronicle of Reverse Engineering • Hosted on GitHub Pages</p>
+      <p class="text-slate-600">Built for security researchers, compilers hackers, and digital archivists. Autonomous weekly update pipelines enabled.</p>
+    </div>
+  </footer>
+
+  <!-- Web Audio Synthesizer (Zero external audio assets needed!) -->
+  <script>
+    let audioCtx = null;
+    let soundEnabled = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.08) {
+      if (!soundEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function toggleAudio() {
+      initAudio();
+      soundEnabled = !soundEnabled;
+      const soundStatus = document.getElementById('soundStatus');
+      const soundIcon = document.getElementById('soundIcon');
+      if (soundEnabled) {
+        soundStatus.innerText = 'SFX ON';
+        soundStatus.classList.add('text-cyber-neonGreen');
+        soundIcon.className = 'fa-solid fa-volume-high text-cyber-neonGreen';
+        playTone(880, 'sine', 0.1);
+      } else {
+        soundStatus.innerText = 'SFX OFF';
+        soundStatus.classList.remove('text-cyber-neonGreen');
+        soundIcon.className = 'fa-solid fa-volume-xmark text-cyber-neonPink';
+      }
+    }
+  </script>
+
+  <!-- Interactive Particles Canvas -->
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff007f';
+        this.alpha = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+  <!-- Main Timeline Application Logic -->
+  <script>
+    let timelineData = null;
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let sortDescending = true; // default: Newest (AI & NSA Ghidra) at top
+
+    async function loadData() {
+      try {
+        const res = await fetch('./data/timeline.json');
+        timelineData = await res.json();
+        renderTimeline();
+        renderEraPills();
+      } catch (err) {
+        console.error('Failed to load timeline.json:', err);
+      }
+    }
+
+    function renderEraPills() {
+      const container = document.getElementById('eraPillsContainer');
+      container.innerHTML = '';
+      timelineData.meta.eras.forEach(era => {
+        const btn = document.createElement('a');
+        btn.href = `#era-${era.id}`;
+        btn.className = 'cyber-glass px-3.5 py-1.5 rounded-full text-xs font-mono text-slate-300 hover:text-cyber-cyan border border-white/5 hover:border-cyber-cyan/50 transition-all';
+        btn.innerText = era.name.split(':')[0];
+        btn.onclick = () => playTone(600, 'triangle', 0.05);
+        container.appendChild(btn);
+      });
+    }
+
+    function toggleSortOrder() {
+      sortDescending = !sortDescending;
+      const label = document.getElementById('sortLabel');
+      const icon = document.getElementById('sortIcon');
+      if (sortDescending) {
+        label.innerText = 'Newest (AI & NSA Top)';
+        icon.className = 'fa-solid fa-arrow-down-wide-short';
+      } else {
+        label.innerText = 'Oldest (1990s Roots Top)';
+        icon.className = 'fa-solid fa-arrow-up-wide-short';
+      }
+      playTone(750, 'sine', 0.06);
+      renderTimeline();
+    }
+
+    function setCategoryFilter(category) {
+      currentFilter = category;
+      document.querySelectorAll('.cat-pill').forEach(pill => {
+        pill.classList.remove('active', 'border-cyber-cyan', 'bg-cyber-cyan/20', 'text-cyber-cyan');
+        pill.classList.add('border-white/10', 'text-slate-300');
+      });
+      event.target.classList.add('active', 'border-cyber-cyan', 'bg-cyber-cyan/20', 'text-cyber-cyan');
+      event.target.classList.remove('border-white/10', 'text-slate-300');
+      playTone(550, 'square', 0.04);
+      renderTimeline();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById('timelineContainer');
+      container.innerHTML = '';
+
+      if (!timelineData) return;
+
+      // Filter and sort items
+      let items = [...timelineData.repositories];
+
+      if (currentFilter !== 'all') {
+        items = items.filter(i => i.category.toLowerCase().includes(currentFilter.toLowerCase()) || i.tags.some(t => t.toLowerCase().includes(currentFilter.toLowerCase())));
+      }
+
+      if (searchQuery) {
+        items = items.filter(i => 
+          i.name.toLowerCase().includes(searchQuery) ||
+          i.summary.toLowerCase().includes(searchQuery) ||
+          i.origin.toLowerCase().includes(searchQuery) ||
+          i.tags.some(t => t.toLowerCase().includes(searchQuery))
+        );
+      }
+
+      // Sort
+      items.sort((a, b) => sortDescending ? b.year - a.year : a.year - b.year);
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-20 cyber-glass rounded-3xl border border-white/10">
+            <i class="fa-solid fa-satellite-dish text-4xl text-slate-500 mb-4 animate-bounce"></i>
+            <h3 class="text-xl font-mono text-slate-300">No repositories matching your query</h3>
+            <p class="text-sm text-slate-500 mt-1">Try searching for 'Ghidra', 'NSA', 'IDA', 'AI', or 'SoftICE'</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Group or display with alternating layout
+      items.forEach((item, index) => {
+        const isLeft = index % 2 === 0;
+
+        const card = document.createElement('div');
+        card.className = `relative flex flex-col md:flex-row items-center gap-8 ${isLeft ? 'md:flex-row-reverse' : ''}`;
+        
+        // Node marker on central line
+        const node = `
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full cyber-glass border-2 border-cyber-cyan flex items-center justify-center text-xs font-mono font-bold text-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)] z-20 bg-cyber-black">
+            ${item.year.toString().slice(-2)}
+          </div>
+        `;
+
+        const cardContent = `
+          <div class="w-full md:w-1/2 pl-12 md:pl-0">
+            <div class="cyber-glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-cyber-cyan/60 transition-all duration-300 group">
+              
+              <!-- Card Header -->
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-bold ${getBadgeStyle(item.badge)}">
+                  ${item.badge}
+                </span>
+                <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-star text-yellow-400"></i> ${item.stars}
+                </span>
+              </div>
+
+              <!-- Title & Origin -->
+              <h3 class="text-2xl font-display font-bold text-white group-hover:text-cyber-cyan transition-colors">
+                ${item.name}
+              </h3>
+              <div class="text-xs font-mono text-cyber-neonPink mt-1 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-microchip"></i>
+                <span>${item.origin} (${item.year})</span>
+              </div>
+
+              <!-- Summary -->
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                ${item.summary}
+              </p>
+
+              <!-- Highlights list -->
+              <div class="space-y-1.5 mb-5 font-mono text-xs text-slate-400">
+                ${item.technicalHighlights.map(h => `
+                  <div class="flex items-start gap-2">
+                    <span class="text-cyber-cyan">▸</span>
+                    <span>${h}</span>
+                  </div>
+                `).join('')}
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                ${item.tags.map(t => `<span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400 border border-white/5">${t}</span>`).join('')}
+              </div>
+
+              <!-- Action Bar -->
+              <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                <button onclick="openModal('${item.id}')" class="text-xs font-mono text-cyber-cyan hover:underline flex items-center gap-1.5 font-bold">
+                  <span>Architecture Deep Dive</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="flex items-center gap-3 text-slate-400 text-sm">
+                  ${item.links.github ? `<a href="${item.links.github}" target="_blank" title="GitHub Repository" class="hover:text-cyber-cyan"><i class="fa-brands fa-github text-base"></i></a>` : ''}
+                  ${item.links.web ? `<a href="${item.links.web}" target="_blank" title="Official Website" class="hover:text-cyber-cyan"><i class="fa-solid fa-globe text-base"></i></a>` : ''}
+                  ${item.links.paper ? `<a href="${item.links.paper}" target="_blank" title="Research Paper" class="hover:text-cyber-cyan"><i class="fa-solid fa-book-open text-base"></i></a>` : ''}
+                  ${item.links.archive ? `<a href="${item.links.archive}" target="_blank" title="Internet Archive" class="hover:text-cyber-cyan"><i class="fa-solid fa-box-archive text-base"></i></a>` : ''}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+
+        card.innerHTML = node + cardContent;
+        container.appendChild(card);
+      });
+    }
+
+    function getBadgeStyle(badge) {
+      if (badge.includes('NSA')) return 'bg-cyber-neonPink/20 text-cyber-neonPink border border-cyber-neonPink/40';
+      if (badge.includes('AI') || badge.includes('MCP')) return 'bg-cyber-neonGreen/20 text-cyber-neonGreen border border-cyber-neonGreen/40';
+      if (badge.includes('Legend') || badge.includes('Gold')) return 'bg-cyber-gold/20 text-cyber-gold border border-cyber-gold/40';
+      return 'bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan/40';
+    }
+
+    function openModal(id) {
+      const item = timelineData.repositories.find(r => r.id === id);
+      if (!item) return;
+
+      playTone(800, 'triangle', 0.08);
+
+      document.getElementById('modalBadge').innerText = item.badge;
+      document.getElementById('modalYear').innerText = `Year: ${item.year} | Category: ${item.category}`;
+      document.getElementById('modalTitle').innerText = item.name;
+      document.getElementById('modalOrigin').innerText = `Originated by: ${item.origin}`;
+      document.getElementById('modalSummary').innerText = item.summary;
+
+      const highlights = document.getElementById('modalHighlights');
+      highlights.innerHTML = item.technicalHighlights.map(h => `<li>${h}</li>`).join('');
+
+      document.getElementById('modalParadigm').innerText = `"${item.paradigmShift}"`;
+
+      const linksContainer = document.getElementById('modalLinks');
+      linksContainer.innerHTML = '';
+
+      if (item.links.github) {
+        linksContainer.innerHTML += `<a href="${item.links.github}" target="_blank" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyber-cyan hover:text-cyber-black text-xs font-mono font-bold flex items-center gap-2 transition-all"><i class="fa-brands fa-github"></i> View GitHub Repo</a>`;
+      }
+      if (item.links.web) {
+        linksContainer.innerHTML += `<a href="${item.links.web}" target="_blank" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyber-cyan hover:text-cyber-black text-xs font-mono font-bold flex items-center gap-2 transition-all"><i class="fa-solid fa-globe"></i> Official Site</a>`;
+      }
+      if (item.links.paper) {
+        linksContainer.innerHTML += `<a href="${item.links.paper}" target="_blank" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyber-cyan hover:text-cyber-black text-xs font-mono font-bold flex items-center gap-2 transition-all"><i class="fa-solid fa-book-open"></i> Research Paper</a>`;
+      }
+      if (item.links.archive) {
+        linksContainer.innerHTML += `<a href="${item.links.archive}" target="_blank" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyber-cyan hover:text-cyber-black text-xs font-mono font-bold flex items-center gap-2 transition-all"><i class="fa-solid fa-box-archive"></i> Archive Snapshot</a>`;
+      }
+
+      const modal = document.getElementById('repoModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('repoModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      playTone(400, 'sine', 0.05);
+    }
+
+    // Close modal on click outside
+    document.getElementById('repoModal').addEventListener('click', (e) => {
+      if (e.target.id === 'repoModal') closeModal();
+    });
+
+    // Keyboard ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Startup
+    loadData();
+  </script>
+</body>
+</html>

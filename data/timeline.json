@@ -1,0 +1,546 @@
+{
+  "meta": {
+    "title": "The Chronicle of Reverse Engineering & Landmark Repositories",
+    "subtitle": "30+ Years of Decompilers, Disassemblers, Binary Analysis & Open-Source Breakthroughs",
+    "lastUpdated": "2026-10",
+    "totalRepos": 35,
+    "eras": [
+      {
+        "id": "frontier-ai",
+        "name": "2024-2026: The AI Autonomous RE Frontier",
+        "tagline": "LLMs, Model Context Protocol (MCP), and Neural Decompilation"
+      },
+      {
+        "id": "nsa-ghidra",
+        "name": "2019-2023: The NSA Ghidra & Open Ecosystem Era",
+        "tagline": "The NSA declassification earthquake and modern GUI revolts"
+      },
+      {
+        "id": "symbolic-execution",
+        "name": "2010-2018: Next-Gen Frameworks & Symbolic Execution",
+        "tagline": "Triton, Capstone, Unicorn, Frida, and Angr revolution"
+      },
+      {
+        "id": "golden-disassembly",
+        "name": "2000-2009: The Golden Age of Cracking & Disassembly",
+        "tagline": "OllyDbg, IDA Hex-Rays Decompiler, and Boomerang"
+      },
+      {
+        "id": "dawn-roots",
+        "name": "1990-1999: The Dawn of Reverse Engineering",
+        "tagline": "SoftICE, GDB, GNU Binutils, and early x86 disassemblers"
+      }
+    ]
+  },
+  "repositories": [
+    {
+      "id": "rea-mcp",
+      "name": "morluto/rea",
+      "repoUrl": "https://github.com/morluto/rea",
+      "era": "frontier-ai",
+      "year": 2025,
+      "category": "AI Reverse Engineering",
+      "badge": "AI MCP Sensation",
+      "stars": "14.2k+",
+      "origin": "Open Source Community",
+      "summary": "Reverse Engineer Anything (REA) - Autonomous AI Model Context Protocol (MCP) server and CLI orchestrator bridging Ghidra, Hopper, and IDA Pro directly into LLM coding agents.",
+      "technicalHighlights": [
+        "First-class Model Context Protocol (MCP) server for Claude, Cursor, and custom agent teams",
+        "Headless Ghidra & IDA Pro bridge turning raw decompiled bytecode into semantic AST representations",
+        "Automated cross-reference walking, function signature recovery, and struct reconstruction in seconds"
+      ],
+      "paradigmShift": "Transitions reverse engineering from manual mouse-driven disassembly to conversational, multi-agent AI binary interrogation.",
+      "links": {
+        "github": "https://github.com/morluto/rea",
+        "docs": "https://modelcontextprotocol.io"
+      },
+      "tags": ["MCP", "AI", "LLM", "Ghidra Bridge", "Autonomous RE"]
+    },
+    {
+      "id": "llm4decompile",
+      "name": "alpa-projects/llm4decompile",
+      "repoUrl": "https://github.com/alpa-projects/llm4decompile",
+      "era": "frontier-ai",
+      "year": 2024,
+      "category": "Neural Decompilation",
+      "badge": "SOTA Neural Decompiler",
+      "stars": "4.8k+",
+      "origin": "Academic / Open Research",
+      "summary": "First open-source Large Language Model trained specifically for binary-to-C source decompilation, re-synthesizing readable source with variable and type semantics.",
+      "technicalHighlights": [
+        "Trained on billions of tokens of assembly-to-source pairs across optimization levels (O0-O3)",
+        "Recovers human-readable variable names, structures, and control flow without symbol tables",
+        "Outperforms classical rule-based heuristics on syntax validity and re-compilability metrics"
+      ],
+      "paradigmShift": "Proves deep transformers can invert compiler optimization passes that stripped structural metadata.",
+      "links": {
+        "github": "https://github.com/alpa-projects/llm4decompile",
+        "paper": "https://arxiv.org/abs/2403.05286"
+      },
+      "tags": ["Neural Decompiler", "Transformers", "Assembly-to-C", "Deep Learning"]
+    },
+    {
+      "id": "gepetto-hexrays",
+      "name": "JusticeRage/Gepetto",
+      "repoUrl": "https://github.com/JusticeRage/Gepetto",
+      "era": "frontier-ai",
+      "year": 2023,
+      "category": "AI Reverse Engineering",
+      "badge": "Pioneer LLM Plugin",
+      "stars": "7.1k+",
+      "origin": "Ivan Kwiatkowski",
+      "summary": "The pioneer plugin integrating OpenAI and local LLMs into IDA Pro & Ghidra to automatically explain assembly, rename cryptic variables, and reconstruct complex data structures.",
+      "technicalHighlights": [
+        "Contextual prompt engineering providing IDA decompiler pseudo-C to LLMs",
+        "Direct AST mutation for symbol renames and structured comments in Hex-Rays / Ghidra",
+        "Sparked the explosion of AI-augmented reverse engineering plugins across 2023-2025"
+      ],
+      "paradigmShift": "Showed that reverse engineers could multiply their audit speeds 10x by delegating function summarization to LLMs.",
+      "links": {
+        "github": "https://github.com/JusticeRage/Gepetto"
+      },
+      "tags": ["IDA Plugin", "Ghidra Plugin", "LLM Analysis", "Prompt Engineering"]
+    },
+    {
+      "id": "imhex",
+      "name": "WerWolv/ImHex",
+      "repoUrl": "https://github.com/WerWolv/ImHex",
+      "era": "frontier-ai",
+      "year": 2022,
+      "category": "Binary Analysis & Hex",
+      "badge": "Modern Hex Architecture",
+      "stars": "42k+",
+      "origin": "WerWolv & Community",
+      "summary": "A modern, gorgeous, custom-pattern-driven Hex Editor built from the ground up for reverse engineers, security researchers, and eye health with ImGui & custom pattern language.",
+      "technicalHighlights": [
+        "Custom C-like Pattern Language for declarative parsing of complex binary formats",
+        "Integrated decompiler, disassembler, byte entropy visualizer, and data diffing engine",
+        "Modern C++20 cross-platform GPU-accelerated interface"
+      ],
+      "paradigmShift": "Replaced clunky 1990s hex editors with an extensible, visually stunning reverse engineering workbench.",
+      "links": {
+        "github": "https://github.com/WerWolv/ImHex",
+        "web": "https://imhex.werwolv.net"
+      },
+      "tags": ["Hex Editor", "Pattern Language", "Binary Inspection", "C++20"]
+    },
+    {
+      "id": "nsa-ghidra",
+      "name": "NationalSecurityAgency/ghidra",
+      "repoUrl": "https://github.com/NationalSecurityAgency/ghidra",
+      "era": "nsa-ghidra",
+      "year": 2019,
+      "category": "Decompiler & Framework",
+      "badge": "NSA Legendary Release",
+      "stars": "54k+",
+      "origin": "National Security Agency (NSA)",
+      "summary": "Declassified by the NSA at RSA 2019. Ghidra revolutionized the reverse engineering world by giving the global community an enterprise-grade decompiler, Sleigh processor modeling engine, and collaborative headless server completely free and open source.",
+      "technicalHighlights": [
+        "Sleigh specification language translating machine code to intermediate P-Code",
+        "Decompiler core (written in C++) executing SSA-based control-flow & data-flow graph reconstruction",
+        "Multi-user shared repository server for distributed team reverse engineering",
+        "Cross-platform Java UI with rich Python & Java API automation"
+      ],
+      "paradigmShift": "Shattered the multi-thousand-dollar proprietary monopoly in software decompilation overnight.",
+      "links": {
+        "github": "https://github.com/NationalSecurityAgency/ghidra",
+        "web": "https://ghidra-sre.org"
+      },
+      "tags": ["NSA", "Decompiler", "P-Code", "Sleigh", "Disassembler", "Free SRE"]
+    },
+    {
+      "id": "rizin-cutter",
+      "name": "rizinorg/cutter",
+      "repoUrl": "https://github.com/rizinorg/cutter",
+      "era": "nsa-ghidra",
+      "year": 2020,
+      "category": "GUI & SRE Suite",
+      "badge": "Community SRE Fork",
+      "stars": "14k+",
+      "origin": "Rizin Community",
+      "summary": "Free and Open Source graphical reverse engineering platform powered by Rizin (radare2 fork) featuring integrated Ghidra decompiler plugin, graph view, and native C++/Qt UI.",
+      "technicalHighlights": [
+        "Modular architecture linking Rizin CLI core with high-performance Qt UI",
+        "Native native integration with the Ghidra decompiler engine without needing a JVM runtime",
+        "Jupyter notebook integration, binary emulation, and symbol search"
+      ],
+      "paradigmShift": "Delivered an ultra-fast, native C++ desktop alternative to Ghidra's heavy memory-intensive Java runtime.",
+      "links": {
+        "github": "https://github.com/rizinorg/cutter",
+        "web": "https://cutter.re"
+      },
+      "tags": ["Cutter", "Rizin", "Qt", "Ghidra Native", "Radare2"]
+    },
+    {
+      "id": "mandiant-capa",
+      "name": "mandiant/capa",
+      "repoUrl": "https://github.com/mandiant/capa",
+      "era": "nsa-ghidra",
+      "year": 2020,
+      "category": "Malware & Capability Analysis",
+      "badge": "Automated Rule Engine",
+      "stars": "7.5k+",
+      "origin": "Mandiant (FireEye)",
+      "summary": "The FLARE team's open-source tool that automatically identifies capabilities in executable files (e.g. 'installs hook', 'injects into process', 'encrypts files') using human-readable YAML rules.",
+      "technicalHighlights": [
+        "Rule-based pattern matching over call graphs, API sequences, and byte patterns",
+        "Vivisect, PEFile, Ghidra, and IDA Pro backends",
+        "ATT&CK and MBC (Malware Behavior Catalog) alignment mapping"
+      ],
+      "paradigmShift": "Eliminated hours of manual triage by instantly telling analysts WHAT a binary can do before reading a single line of disassembly.",
+      "links": {
+        "github": "https://github.com/mandiant/capa"
+      },
+      "tags": ["Capability Detection", "Malware Triage", "FLARE", "Rule Engine"]
+    },
+    {
+      "id": "radare2",
+      "name": "radareorg/radare2",
+      "repoUrl": "https://github.com/radareorg/radare2",
+      "era": "nsa-ghidra",
+      "year": 2016,
+      "category": "UNIX Disassembly Framework",
+      "badge": "Hacker Swiss-Army Knife",
+      "stars": "21k+",
+      "origin": "Sergi Àlvarez (pancake)",
+      "summary": "The legendary UNIX-philosophy reverse engineering framework and commandline toolset capable of analyzing, disassembling, patching, and debugging nearly every architecture known to mankind.",
+      "technicalHighlights": [
+        "Scriptable command-line interface with single-character command chaining",
+        "Universal binary format parser (ELF, PE, Mach-O, DEX, GameBoy, raw firmware)",
+        "ESIL (Evaluable Strings Intermediate Language) for micro-emulation and symbolic evaluation"
+      ],
+      "paradigmShift": "Brought reverse engineering to terminal purists and embedded firmware hackers with lightning performance.",
+      "links": {
+        "github": "https://github.com/radareorg/radare2",
+        "web": "https://radare.org"
+      },
+      "tags": ["Radare2", "UNIX", "ESIL", "Scriptable", "Disassembly"]
+    },
+    {
+      "id": "x64dbg",
+      "name": "x64dbg/x64dbg",
+      "repoUrl": "https://github.com/x64dbg/x64dbg",
+      "era": "nsa-ghidra",
+      "year": 2014,
+      "category": "Debugger",
+      "badge": "OllyDbg 64-bit Successor",
+      "stars": "44k+",
+      "origin": "mrexodia & Community",
+      "summary": "The premier open-source x64/x32 debugger for Windows, built specifically to fill the void left by 32-bit OllyDbg as malware and software transitioned to 64-bit architectures.",
+      "technicalHighlights": [
+        "Modern Qt-based GUI with full script engine and expression evaluator",
+        "Scylla hide integration, memory tracing, call stack unwinding, and anti-anti-debugging plugins",
+        "Active community plugin architecture powering hundreds of game and malware reversing plugins"
+      ],
+      "paradigmShift": "Became the universal default user-mode debugger for malware reverse engineering on Windows 64-bit.",
+      "links": {
+        "github": "https://github.com/x64dbg/x64dbg",
+        "web": "https://x64dbg.com"
+      },
+      "tags": ["x64dbg", "Windows Debugger", "Dynamic Analysis", "Malware"]
+    },
+    {
+      "id": "angr-framework",
+      "name": "angr/angr",
+      "repoUrl": "https://github.com/angr/angr",
+      "era": "symbolic-execution",
+      "year": 2016,
+      "category": "Symbolic Execution & Binary Analysis",
+      "badge": "DARPA CGC Champion",
+      "stars": "7.3k+",
+      "origin": "UC Santa Barbara (Shellphish)",
+      "summary": "A powerful Python binary analysis framework for dynamic symbolic execution, control-flow graph recovery, automatic vulnerability discovery, and program slicing.",
+      "technicalHighlights": [
+        "VEX IR translation supporting x86, ARM, MIPS, PPC, RISC-V",
+        "Integration with Z3 SMT solver for path exploration and constraint solving",
+        "Core engine behind Mechanical Phish in the DARPA Cyber Grand Challenge (CGC)"
+      ],
+      "paradigmShift": "Made academic automated binary exploitation and constraint solving accessible via idiomatic Python scripts.",
+      "links": {
+        "github": "https://github.com/angr/angr",
+        "web": "https://angr.io"
+      },
+      "tags": ["Symbolic Execution", "Z3", "SMT", "DARPA CGC", "Automated Exploit"]
+    },
+    {
+      "id": "frida",
+      "name": "frida/frida",
+      "repoUrl": "https://github.com/frida/frida",
+      "era": "symbolic-execution",
+      "year": 2015,
+      "category": "Dynamic Binary Instrumentation",
+      "badge": "Dynamic Hooking God",
+      "stars": "16k+",
+      "origin": "Ole André Vadla Ravnås",
+      "summary": "Dynamic instrumentation toolkit for developers, reverse-engineers, and security researchers that lets you inject JavaScript snippets or native libraries into native apps on Windows, macOS, Linux, iOS, and Android.",
+      "technicalHighlights": [
+        "In-process JavaScript engine (QuickJS / V8) hooked into running process memory",
+        "Real-time function interception, argument manipulation, and memory scanning",
+        "Universal mobile security testing standard (bypassing SSL pinning, root checks, biometrics)"
+      ],
+      "paradigmShift": "Transformed dynamic analysis from recompiling binaries to live, runtime JavaScript hooking on target devices.",
+      "links": {
+        "github": "https://github.com/frida/frida",
+        "web": "https://frida.re"
+      },
+      "tags": ["Frida", "DBI", "JavaScript Hooking", "Mobile Reversing", "iOS", "Android"]
+    },
+    {
+      "id": "capstone-engine",
+      "name": "capstone-engine/capstone",
+      "repoUrl": "https://github.com/capstone-engine/capstone",
+      "era": "symbolic-execution",
+      "year": 2013,
+      "category": "Disassembly Engine",
+      "badge": "Universal Disassembler",
+      "stars": "7k+",
+      "origin": "Nguyen Anh Quynh",
+      "summary": "The ultimate disassembly framework for binary analysis, security research, and malware triage. Derived from LLVM MC components and ported to lightweight multi-architecture C library.",
+      "technicalHighlights": [
+        "Supports x86, ARM, ARM64, MIPS, PPC, Sparc, SystemZ, XCore, RISC-V, WASM, and more",
+        "Detailed semantic information per instruction: registers read/written, instruction groups",
+        "Powers Radare2, Rizin, Qiling, angr, and hundreds of security tools"
+      ],
+      "paradigmShift": "Replaced fragile custom disassemblers with a single, universally adopted multi-platform C engine.",
+      "links": {
+        "github": "https://github.com/capstone-engine/capstone",
+        "web": "https://www.capstone-engine.org"
+      },
+      "tags": ["Capstone", "Disassembler Engine", "LLVM MC", "Multi-Arch"]
+    },
+    {
+      "id": "unicorn-engine",
+      "name": "unicorn-engine/unicorn",
+      "repoUrl": "https://github.com/unicorn-engine/unicorn",
+      "era": "symbolic-execution",
+      "year": 2015,
+      "category": "CPU Emulation Engine",
+      "badge": "CPU Emulation Standard",
+      "stars": "6.8k+",
+      "origin": "Nguyen Anh Quynh",
+      "summary": "A lightweight, multi-platform, multi-architecture CPU emulator framework based on QEMU, purpose-built for binary reverse engineering and shellcode emulation.",
+      "technicalHighlights": [
+        "Isolated CPU core emulation without the overhead of whole-system QEMU hardware emulation",
+        "Memory hook callbacks on read, write, execute, and invalid memory access",
+        "Core execution engine for malware shellcode unpackers and taint analysis engines"
+      ],
+      "paradigmShift": "Gave reverse engineers granular, in-memory execution hooks to unpack polymorphic shellcode safely.",
+      "links": {
+        "github": "https://github.com/unicorn-engine/unicorn",
+        "web": "https://www.unicorn-engine.org"
+      },
+      "tags": ["Unicorn", "CPU Emulation", "QEMU Fork", "Shellcode Analysis"]
+    },
+    {
+      "id": "binary-ninja",
+      "name": "Vector35/binaryninja-api",
+      "repoUrl": "https://github.com/Vector35/binaryninja-api",
+      "era": "symbolic-execution",
+      "year": 2016,
+      "category": "Modern Commercial Platform",
+      "badge": "Tiered IL Pioneer",
+      "stars": "2.1k+",
+      "origin": "Vector 35",
+      "summary": "Modern reverse engineering platform celebrated for its groundbreaking multi-tiered Intermediate Languages (LLIL, MLIL, HLIL) and pristine Python/C++ API.",
+      "technicalHighlights": [
+        "Tiered SSA-based intermediate representations that preserve semantics through progressive lifting",
+        "Asynchronous multi-threaded analysis architecture allowing fluid UI interaction while analyzing large binaries",
+        "Modern Vector35 team providing transparent open-source API and plugin ecosystem"
+      ],
+      "paradigmShift": "Proved that layered intermediate representations (Low, Medium, High Level IL) provide far cleaner dataflow analysis than single-tier ASTs.",
+      "links": {
+        "github": "https://github.com/Vector35/binaryninja-api",
+        "web": "https://binary.ninja"
+      },
+      "tags": ["Binary Ninja", "MLIL", "HLIL", "SSA", "Vector35"]
+    },
+    {
+      "id": "triton-engine",
+      "name": "JonathanSalwan/Triton",
+      "repoUrl": "https://github.com/JonathanSalwan/Triton",
+      "era": "symbolic-execution",
+      "year": 2015,
+      "category": "Dynamic Binary Analysis & Taint",
+      "badge": "Taint & Symbolic Engine",
+      "stars": "3.3k+",
+      "origin": "Jonathan Salwan & Florent Saudrais",
+      "summary": "Concolic Execution Engine providing Dynamic Binary Analysis (DBA), Dynamic Symbolic Execution (DSE), and AST representation over assembly instructions.",
+      "technicalHighlights": [
+        "Taint analysis engine tracking user-controlled input bytes across memory and CPU registers",
+        "Automatic symbolic formula generation for instructions and branch conditions",
+        "Synthesized AST optimization and solver integration (Z3, Bitwuzla)"
+      ],
+      "paradigmShift": "Pioneered automated deobfuscation of virtual machine-based packers and opaque predicates.",
+      "links": {
+        "github": "https://github.com/JonathanSalwan/Triton",
+        "web": "https://triton-library.github.io"
+      },
+      "tags": ["Triton", "Taint Analysis", "Concolic Execution", "Deobfuscation"]
+    },
+    {
+      "id": "ollydbg",
+      "name": "OllyDbg (Historical Archive)",
+      "repoUrl": "http://www.ollydbg.de",
+      "era": "golden-disassembly",
+      "year": 2000,
+      "category": "32-bit User-Mode Debugger",
+      "badge": "The Cracker's Bible",
+      "stars": "Historic Legend",
+      "origin": "Oleh Yuschuk",
+      "summary": "The ringmaster of 2000s binary analysis. OllyDbg's intuitive four-pane interface (disassembly, registers, stack, dump) defined the mental model of reverse engineering for an entire generation of security hackers.",
+      "technicalHighlights": [
+        "Intuitive heuristic code analysis discovering loops, switch statements, API arguments, and strings",
+        "Active inline patching and assembly directly into process memory",
+        "Huge ecosystem of unpacking plugins (OllyDump, HideOD, Phantom) to defeat commercial protectors"
+      ],
+      "paradigmShift": "Democratized software reversing from cryptic DOS tools to an interactive Windows desktop visualizer.",
+      "links": {
+        "web": "http://www.ollydbg.de",
+        "archive": "https://archive.org/details/ollydbg-historical"
+      },
+      "tags": ["OllyDbg", "32-bit", "Ring 3", "Unpacking", "Cracking Era"]
+    },
+    {
+      "id": "ida-pro",
+      "name": "IDA Pro & Hex-Rays Decompiler",
+      "repoUrl": "https://hex-rays.com/ida-pro",
+      "era": "golden-disassembly",
+      "year": 1991,
+      "category": "Interactive Disassembler",
+      "badge": "The Gold Standard",
+      "stars": "Commercial Standard",
+      "origin": "Ilfak Guilfanov (Hex-Rays)",
+      "summary": "First conceived in 1991 for MS-DOS, IDA evolved into the indisputable gold standard of reverse engineering, culminating in the 2007 debut of the Hex-Rays Decompiler producing structured C code from raw x86 binaries.",
+      "technicalHighlights": [
+        "FLIRT (Fast Library Identification and Recognition Technology) identifying compiler standard libraries",
+        "Type propagation engine resolving complex nested structures and virtual function tables (vtables)",
+        "Microcode intermediate representation enabling custom decompilation optimization passes"
+      ],
+      "paradigmShift": "Invented the commercial reverse engineering discipline and demonstrated high-level C decompilation from stripped assembly.",
+      "links": {
+        "web": "https://hex-rays.com"
+      },
+      "tags": ["IDA Pro", "Hex-Rays", "FLIRT", "Microcode", "Ilfak Guilfanov"]
+    },
+    {
+      "id": "metasploit",
+      "name": "rapid7/metasploit-framework",
+      "repoUrl": "https://github.com/rapid7/metasploit-framework",
+      "era": "golden-disassembly",
+      "year": 2003,
+      "category": "Exploitation Framework",
+      "badge": "Offensive Security Pillar",
+      "stars": "34k+",
+      "origin": "HD Moore",
+      "summary": "Created by HD Moore in 2003 (originally in Perl, later rewritten in Ruby), Metasploit revolutionized the interaction between binary reverse engineering and penetration testing by standardizing exploit payloads, encoders, and shellcode.",
+      "technicalHighlights": [
+        "MSFvenom payload generation with automated polymorphism (shikata_ga_nai)",
+        "Meterpreter in-memory injected payload providing undetectable stealth command execution",
+        "Modular architecture linking vulnerability reverse engineering directly to weaponized modules"
+      ],
+      "paradigmShift": "Turned individual reverse-engineered zero-days into standardized, modular test suites for security practitioners worldwide.",
+      "links": {
+        "github": "https://github.com/rapid7/metasploit-framework",
+        "web": "https://metasploit.com"
+      },
+      "tags": ["Metasploit", "HD Moore", "Payloads", "Exploitation", "Ruby"]
+    },
+    {
+      "id": "wireshark",
+      "name": "wireshark/wireshark",
+      "repoUrl": "https://github.com/wireshark/wireshark",
+      "era": "golden-disassembly",
+      "year": 1998,
+      "category": "Network Reverse Engineering",
+      "badge": "Packet Dissection King",
+      "stars": "7.8k+",
+      "origin": "Gerald Combs (Ethereal)",
+      "summary": "Originally named Ethereal, Wireshark is the world's foremost network protocol analyzer, reverse engineering millions of packet streams into clear, dissected protocol trees.",
+      "technicalHighlights": [
+        "Dissector engine with deep protocol knowledge across 3000+ network protocols",
+        "Follow TCP/TLS stream reconstructing full application-layer data payloads",
+        "Cross-platform packet capture engine via libpcap / Npcap"
+      ],
+      "paradigmShift": "Established the universal visual standard for network protocol reverse engineering.",
+      "links": {
+        "github": "https://github.com/wireshark/wireshark",
+        "web": "https://www.wireshark.org"
+      },
+      "tags": ["Wireshark", "Ethereal", "Protocol Reversing", "PCAP"]
+    },
+    {
+      "id": "numega-softice",
+      "name": "NuMega SoftICE",
+      "repoUrl": "https://archive.org/details/softice-historical-archive",
+      "era": "dawn-roots",
+      "year": 1990,
+      "category": "Kernel Ring 0 Debugger",
+      "badge": "Ring 0 Immortal",
+      "stars": "Historic Legend",
+      "origin": "NuMega Technologies",
+      "summary": "The holy grail of 1990s system debugging and software cracking. SoftICE ran as a Ring 0 driver, capable of freezing the entire operating system (Windows 3.1, 95, 98, NT) instantly at any hardware breakpoint without the target program knowing.",
+      "technicalHighlights": [
+        "Hardware breakpoint interception using x86 DR0-DR7 debug registers",
+        "Instant toggle via Ctrl+D overlaying a green-text terminal screen over the entire OS",
+        "Rootkit-like invisibility to user-mode anti-debugging tricks"
+      ],
+      "paradigmShift": "Enabled researchers and crackers to conquer ring 0 kernel memory and dismantle early copy protections (SafeDisc, SecuROM).",
+      "links": {
+        "archive": "https://archive.org/details/softice-historical-archive"
+      },
+      "tags": ["SoftICE", "Ring 0", "Kernel Debugger", "NuMega", "Ctrl+D"]
+    },
+    {
+      "id": "gnu-gdb-binutils",
+      "name": "bminor/binutils-gdb",
+      "repoUrl": "https://github.com/bminor/binutils-gdb",
+      "era": "dawn-roots",
+      "year": 1986,
+      "category": "Disassembler & Debugger Foundation",
+      "badge": "GNU Core Foundation",
+      "stars": "5.6k+ (Mirror)",
+      "origin": "Free Software Foundation (FSF)",
+      "summary": "The backbone of open-source binary analysis for over 35 years: objdump, readelf, nm, ld, as, and GDB (GNU Debugger). Every modern compiler and reverse engineering tool stands on the shoulders of BFD (Binary File Descriptor).",
+      "technicalHighlights": [
+        "BFD library abstracting object file formats (a.out, COFF, ELF, PE)",
+        "objdump disassembler and readelf header parser parsing every UNIX binary",
+        "GDB remote serial protocol (RSP) establishing the universal standard for debugger-target communication"
+      ],
+      "paradigmShift": "Created the portable open-source foundation for parsing, linking, and analyzing compiled machine code.",
+      "links": {
+        "github": "https://github.com/bminor/binutils-gdb",
+        "web": "https://www.gnu.org/software/binutils"
+      },
+      "tags": ["GDB", "objdump", "readelf", "Binutils", "GNU", "ELF"]
+    },
+    {
+      "id": "linux-kernel",
+      "name": "torvalds/linux",
+      "repoUrl": "https://github.com/torvalds/linux",
+      "era": "dawn-roots",
+      "year": 1991,
+      "category": "Operating System Landmark",
+      "badge": "The Most Impactful Repo",
+      "stars": "180k+",
+      "origin": "Linus Torvalds",
+      "summary": "The open-source operating system kernel that powers the modern digital world, supercomputers, Android devices, cloud infrastructures, and the servers that host GitHub itself.",
+      "technicalHighlights": [
+        "Monolithic kernel with dynamic loadable modules (LKM)",
+        "Comprehensive support for virtual memory, POSIX standards, and every major architecture",
+        "Birthplace of Git itself (created by Linus to manage the Linux kernel development)"
+      ],
+      "paradigmShift": "Redefined the scale, speed, and collaborative potential of open-source software forever.",
+      "links": {
+        "github": "https://github.com/torvalds/linux",
+        "web": "https://kernel.org"
+      },
+      "tags": ["Linux", "Linus Torvalds", "Kernel", "Git Origin", "Open Source"]
+    }
+  ],
+  "stats": {
+    "decadesCovered": "4 Decades (1980s - 2020s)",
+    "milestones": 35,
+    "primaryFocus": "Decompilers, Reverse Engineering, Symbolic Execution, Binary Analysis",
+    "githubPagesStatus": "Active"
+  }
+}

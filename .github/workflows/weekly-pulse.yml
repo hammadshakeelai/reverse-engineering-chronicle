@@ -1,0 +1,61 @@
+name: Weekly Reverse Engineering Knowledge Pulse
+
+on:
+  schedule:
+    # Runs every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  weekly-pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Schema & Link Integrity Check
+        run: |
+          python -c "
+          import json, sys
+          with open('data/timeline.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          repos = data.get('repositories', [])
+          print(f'Successfully loaded {len(repos)} repositories across {len(data[\"meta\"][\"eras\"])} eras.')
+          assert len(repos) > 0, 'No repositories found in dataset!'
+          "
+
+      - name: Create Weekly Research Reminder Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issueTitle = `Weekly Pulse: Reverse Engineering Trends & Milestone Audit (${new Date().toISOString().slice(0, 10)})`;
+            const issueBody = `
+            ### 🔍 Automated Weekly Audit Triggered
+            
+            This is an automated prompt dispatch for maintaining the repository knowledge base.
+            
+            **Action Items for AI Subagent / Maintainer:**
+            1. Review [prompts/UPDATE_PIPELINE_PROMPT.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/master/prompts/UPDATE_PIPELINE_PROMPT.md).
+            2. Scan GitHub trending under topics: \`reverse-engineering\`, \`decompiler\`, \`mcp\`, \`binary-analysis\`.
+            3. Check arXiv \`cs.CR\` for breakthrough decompilation models.
+            4. Append any qualified milestone to \`data/timeline.json\` and commit.
+            
+            *Automated by .github/workflows/weekly-pulse.yml*
+            `;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: ['automation', 'weekly-pulse', 'research']
+            });

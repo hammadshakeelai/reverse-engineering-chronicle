@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Timeline-00f0ff?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Timeline-00f0ff?style=for-the-badge&logo=github&logoColor=white)](https://hammadshakeelai.github.io/reverse-engineering-chronicle/)
 [![Decades Charted](https://img.shields.io/badge/History-30%2B%20Years-ff007f?style=for-the-badge)](./data/timeline.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff66?style=for-the-badge)](./LICENSE)
 [![Autonomous Updates](https://img.shields.io/badge/Autonomous%20Agents-Enabled-9d00ff?style=for-the-badge)](./prompts/UPDATE_PIPELINE_PROMPT.md)
